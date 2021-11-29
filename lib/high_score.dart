@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:times/theme/times_text.dart';
 
 class HighScore extends StatefulWidget {
-  const HighScore({Key? key, required int score}) : super(key: key);
+  const HighScore({Key? key}) : super(key: key);
 
   @override
   _HighScoreState createState() => _HighScoreState();
