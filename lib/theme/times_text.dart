@@ -15,7 +15,15 @@ class TimesText {
     return sansRegular14.copyWith(fontSize: 20);
   }
 
+  static TextStyle get sansBold64 {
+    return sansRegular14.copyWith(fontSize: 64, fontWeight: FontWeight.w500);
+  }
+
   static TextStyle get sansLight64 {
     return sansRegular14.copyWith(fontSize: 64, fontWeight: FontWeight.w300);
+  }
+
+  static TextStyle get sansLight48 {
+    return sansLight64.copyWith(fontSize: 48);
   }
 }

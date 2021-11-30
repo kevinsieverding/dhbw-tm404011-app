@@ -8,14 +8,14 @@ import 'package:times/theme/times_text.dart';
 import 'package:times/ui/problem_card.dart';
 import 'package:times/ui/swipeable_card_deck.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class GamePage extends StatefulWidget {
+  const GamePage({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _HomePageState();
+  State<StatefulWidget> createState() => _GamePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _GamePageState extends State<GamePage> {
   static const maxLives = 3;
   Random random = Random();
   int _highScore = 0;
