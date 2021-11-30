@@ -6,9 +6,7 @@ import 'package:flutter/physics.dart';
 typedef SwipeHandler = void Function(AxisDirection direction, Card card);
 typedef CardBuilder = Card Function();
 
-/**
- * Based on https://github.com/jushutch/swiping_card_deck
- */
+/// Based on https://github.com/jushutch/swiping_card_deck
 class SwipeableCardDeck extends StatefulWidget {
   final CardBuilder _cardBuilder;
   final SwipeHandler _swipeHandler;
