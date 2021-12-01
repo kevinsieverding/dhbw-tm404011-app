@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:times/model/user_model.dart';
 import 'package:times/theme/times_theme.dart';
-import 'package:times/ui/game_over_page.dart';
-import 'package:times/ui/game_page.dart';
-import 'package:times/ui/home_page.dart';
-import 'package:times/ui/landing_page.dart';
-import 'package:times/ui/splash_page.dart';
+import 'package:times/ui/page/game_over_page.dart';
+import 'package:times/ui/page/game_page/game_page.dart';
+import 'package:times/ui/page/home_page.dart';
+import 'package:times/ui/page/landing_page.dart';
+import 'package:times/ui/page/splash_page.dart';
 
 void main() {
   runApp(MultiProvider(

@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:times/model/problem.dart';
 import 'package:times/theme/times_color.dart';
 import 'package:times/theme/times_text.dart';
-import 'package:times/ui/problem_card.dart';
-import 'package:times/ui/swipeable_card_deck.dart';
+import 'package:times/ui/component/swipeable_card_deck.dart';
 
 class GamePage extends StatefulWidget {
   const GamePage({Key? key}) : super(key: key);
