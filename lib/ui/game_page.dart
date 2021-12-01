@@ -1,4 +1,3 @@
-import 'dart:developer' as dev;
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -59,9 +58,19 @@ class _GamePageState extends State<GamePage> {
                                   pc.problem.isValid() ||
                               direction == AxisDirection.left &&
                                   !pc.problem.isValid()) {
-                            correctAnswer(pc.problem);
+                            setState(() {
+                              _highScore +=
+                                  pc.problem.operand1 * pc.problem.operand2;
+                            });
                           } else {
-                            wrongAnswer(pc.problem);
+                            if (_lives > 1) {
+                              setState(() {
+                                _lives--;
+                              });
+                            } else {
+                              Navigator.of(context)
+                                  .pushReplacementNamed('/game_over');
+                            }
                           }
                         },
                       ))))
@@ -80,22 +89,6 @@ class _GamePageState extends State<GamePage> {
       return Problem.withResult(
           a, b, a * b + (random.nextInt(1 + a * b * 2) - a * b));
     }
-  }
-
-  void wrongAnswer(Problem problem) {
-    setState(() {
-      if (_lives > 0) {
-        _lives--;
-      } else {
-        dev.log('YOU LOST!');
-      }
-    });
-  }
-
-  void correctAnswer(Problem problem) {
-    setState(() {
-      _highScore += problem.operand1 * problem.operand2;
-    });
   }
 
   List<Icon> getLiveIcons() {

@@ -5,14 +5,9 @@ import 'package:times/repository/user_repository.dart';
 import 'package:times/theme/times_color.dart';
 import 'package:times/theme/times_text.dart';
 
-class SplashPage extends StatefulWidget {
+class SplashPage extends StatelessWidget {
   const SplashPage({Key? key}) : super(key: key);
 
-  @override
-  State<StatefulWidget> createState() => _SplashPageState();
-}
-
-class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     final userModel = Provider.of<UserModel>(context, listen: false);

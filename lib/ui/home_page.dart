@@ -23,7 +23,9 @@ class HomePage extends StatelessWidget {
             ]),
         Center(
             child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/game');
+                },
                 style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(
                         vertical: 32, horizontal: 64)),
