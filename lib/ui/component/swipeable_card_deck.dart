@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
@@ -103,6 +104,11 @@ class _SwipeableCardDeckState extends State<SwipeableCardDeck>
       },
       onPanEnd: (DragEndDetails details) async {
         double vx = details.velocity.pixelsPerSecond.dx;
+
+        final minVelocity = widget._minVelocity;
+        final x = _dragAlignment.x;
+        log('vs: $vx, minVelocity: $minVelocity, x: $x, swipeThreshold: $_swipeThreshold');
+
         if (vx >= widget._minVelocity || _dragAlignment.x >= _swipeThreshold) {
           await _swipeCard(AxisDirection.right);
         } else if (vx <= -widget._minVelocity ||

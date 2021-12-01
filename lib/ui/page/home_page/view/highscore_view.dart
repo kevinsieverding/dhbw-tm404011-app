@@ -16,47 +16,79 @@ class _HighscoreViewState extends State<HighscoreView> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
 
-    return Column(
-      children: [
-        Center(
-            child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(25),
-                ),
-                child: FutureBuilder<List<HighscoreWithUserName>>(
-                    future:
-                        HighscoreRepository.findAllWithUserNamesOrderByScore(),
-                    builder: (BuildContext context,
-                        AsyncSnapshot<List<HighscoreWithUserName>> snapshot) {
-                      if (snapshot.hasData) {
-                        final highestScore = snapshot.data?.first;
-                        return Column(
+    return FutureBuilder<List<HighscoreWithUserName>>(
+        future: HighscoreRepository.findAllWithUserNamesOrderByScore(),
+        builder: (BuildContext context,
+            AsyncSnapshot<List<HighscoreWithUserName>> snapshot) {
+          if (snapshot.hasData) {
+            if (snapshot.data!.isEmpty) {
+              return Center(
+                  child: Text('Es gibt noch eine Highscores!',
+                      style: TimesText.sansRegular20));
+            }
+
+            final highestScore = snapshot.data!.first;
+            snapshot.data!.removeAt(0);
+
+            return SizedBox(
+                width: double.infinity,
+                child: Column(
+                  children: [
+                    // page header
+                    Container(
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 30, horizontal: 15),
+                        constraints: BoxConstraints(
+                            maxWidth: MediaQuery.of(context).size.width - 140),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text(highestScore?.userName ?? 'unbekannt'),
-                            Text(highestScore?.score?.toString() ?? '0',
+                            Text(highestScore.userName ?? 'unbekannt',
+                                style: TimesText.sansRegular20),
+                            Text(highestScore.score?.toString() ?? '0',
                                 style: TimesText.sansLight64)
                           ],
-                        );
-                      } else if (snapshot.hasError) {
-                        return Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [Text(snapshot.error.toString())],
-                          ),
-                        );
-                      } else {
-                        return Center(
-                            child: SizedBox(
-                                width: screenWidth * 0.2,
-                                height: screenWidth * 0.2,
-                                child: const LoadingIndicator(
-                                    indicatorType:
-                                        Indicator.circleStrokeSpin)));
-                      }
-                    })))
-      ],
-    );
+                        )),
+                    Expanded(
+                        child: ListView(children: _getListItems(snapshot.data)))
+                  ],
+                ));
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [Text(snapshot.error.toString())],
+              ),
+            );
+          } else {
+            return Center(
+                child: SizedBox(
+                    width: screenWidth * 0.2,
+                    height: screenWidth * 0.2,
+                    child: const LoadingIndicator(
+                        indicatorType: Indicator.circleStrokeSpin)));
+          }
+        });
+  }
+
+  List<Widget> _getListItems(List<HighscoreWithUserName>? highscores) {
+    final List<Widget> widgets = [];
+
+    if (highscores == null) {
+      return widgets;
+    }
+
+    for (var highscore in highscores) {
+      widgets.add(Padding(
+          padding: const EdgeInsets.all(8),
+          child: ListTile(
+              leading: Text(highscore.score.toString(),
+                  style: TimesText.sansRegular48),
+              title: Text(highscore.userName ?? 'unknown',
+                  style: TimesText.sansRegular20))));
+    }
+
+    return widgets;
   }
 }
