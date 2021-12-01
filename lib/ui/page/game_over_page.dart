@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:times/model/highscore_model.dart';
 import 'package:times/theme/times_color.dart';
 import 'package:times/theme/times_text.dart';
 
@@ -23,16 +25,21 @@ class GameOverPage extends StatelessWidget {
                   Text('Highscore',
                       style: TimesText.sansRegular48
                           .copyWith(color: Colors.white)),
-                  Text('0',
-                      style:
-                          TimesText.sansRegular64.copyWith(color: Colors.white))
+                  Consumer<HighscoreModel>(
+                    builder: (context, highscore, child) {
+                      final score = highscore.highscore;
+                      return Text('$score',
+                          style: TimesText.sansRegular64
+                              .copyWith(color: Colors.white));
+                    },
+                  )
                 ]),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       ElevatedButton(
                           onPressed: () {
-                            Navigator.of(context).pushReplacementNamed('/home');
+                            Navigator.of(context).pop();
                           },
                           child: Text('Zurück', style: TimesText.sansRegular20),
                           style: ElevatedButton.styleFrom(

@@ -1,10 +1,17 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:times/model/highscore.dart';
+import 'package:times/model/highscore_model.dart';
 import 'package:times/model/problem.dart';
+import 'package:times/model/user_model.dart';
+import 'package:times/repository/highscore_repository.dart';
 import 'package:times/theme/times_color.dart';
 import 'package:times/theme/times_text.dart';
 import 'package:times/ui/component/swipeable_card_deck.dart';
+
+import 'problem_card.dart';
 
 class GamePage extends StatefulWidget {
   const GamePage({Key? key}) : super(key: key);
@@ -67,6 +74,16 @@ class _GamePageState extends State<GamePage> {
                                 _lives--;
                               });
                             } else {
+                              final score = Highscore();
+                              score.score = _highScore;
+                              score.userId =
+                                  Provider.of<UserModel>(context, listen: false)
+                                      .user
+                                      ?.id;
+                              HighscoreRepository.insert(score);
+                              Provider.of<HighscoreModel>(context,
+                                      listen: false)
+                                  .highscore = _highScore;
                               Navigator.of(context)
                                   .pushReplacementNamed('/game_over');
                             }

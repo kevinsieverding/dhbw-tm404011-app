@@ -12,6 +12,18 @@ Future<Database> _openDatabase(String dbName) async {
 }
 
 Future<void> _onCreate(Database db, int version) async {
-  return db.execute(
-      'CREATE TABLE Users(id INTEGER PRIMARY KEY AUTOINCREMENT, name TXT);');
+  await db.execute('''
+    create table user(
+      id integer primary key autoincrement,
+      name txt
+    );
+    ''');
+  await db.execute('''
+  create table highscore(
+      id integer primary key autoincrement,
+      userId integer,
+      score integer,
+      foreign key(userId) references user(id)
+    );
+    ''');
 }

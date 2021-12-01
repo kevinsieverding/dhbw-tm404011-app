@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:times/model/user_model.dart';
 import 'package:times/repository/user_repository.dart';
@@ -25,16 +26,25 @@ class SplashPage extends StatelessWidget {
       Navigator.of(context).pushReplacementNamed('/home');
     }
 
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return SafeArea(
         child: Scaffold(
             backgroundColor: TimesColor.orange,
             body: Center(
                 child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text('1 x 1',
-                    style: TimesText.sansBold64.copyWith(color: Colors.white))
+                    style: TimesText.sansBold64.copyWith(color: Colors.white)),
+                SizedBox(
+                    width: screenWidth * 0.2,
+                    height: screenWidth * 0.2,
+                    child: const LoadingIndicator(
+                      indicatorType: Indicator.circleStrokeSpin,
+                      colors: [Colors.white],
+                    ))
               ],
             ))));
   }
