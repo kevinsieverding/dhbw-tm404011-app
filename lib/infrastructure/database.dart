@@ -3,6 +3,7 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:times/constants.dart' as constants;
 
+/// Open DB and provide as global object
 final db = _openDatabase(constants.dbName);
 
 Future<Database> _openDatabase(String dbName) async {
@@ -11,6 +12,7 @@ Future<Database> _openDatabase(String dbName) async {
       onCreate: _onCreate, version: 1);
 }
 
+/// Initialize DB schema
 Future<void> _onCreate(Database db, int version) async {
   await db.execute('''
     create table user(

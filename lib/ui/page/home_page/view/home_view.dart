@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:times/model/highscore_model.dart';
 import 'package:times/theme/times_text.dart';
 
+/// Basic view of the home page.
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
 

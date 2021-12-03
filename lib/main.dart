@@ -10,6 +10,7 @@ import 'package:times/ui/page/landing_page.dart';
 import 'package:times/ui/page/splash_page.dart';
 
 void main() {
+  // Initialize global state for the user info and current highscore.
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (context) => UserModel()),
     ChangeNotifierProvider(create: (context) => HighscoreModel())

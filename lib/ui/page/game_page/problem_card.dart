@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:times/model/problem.dart';
 import 'package:times/theme/times_text.dart';
 
+/// Simple card widget to display multiplication problems.
 class ProblemCard extends Card {
   final Problem problem;
 

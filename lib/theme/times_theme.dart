@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:times/theme/times_color.dart';
 import 'package:times/theme/times_text.dart';
 
+/// Custom theme configuration
 class TimesTheme {
   static ThemeData get light {
     return ThemeData(

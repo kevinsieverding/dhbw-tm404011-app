@@ -8,11 +8,13 @@ import 'package:times/model/problem.dart';
 import 'package:times/model/user_model.dart';
 import 'package:times/repository/highscore_repository.dart';
 import 'package:times/theme/times_color.dart';
+import 'package:times/theme/times_icons.dart';
 import 'package:times/theme/times_text.dart';
 import 'package:times/ui/component/swipeable_card_deck.dart';
 
 import 'problem_card.dart';
 
+/// Page taht shows the main "swipe" game.
 class GamePage extends StatefulWidget {
   const GamePage({Key? key}) : super(key: key);
 
@@ -58,42 +60,36 @@ class _GamePageState extends State<GamePage> {
                       height: MediaQuery.of(context).size.height * 0.6,
                       child: SwipeableCardDeck(
                         cardBuilder: () => ProblemCard(getProblem()),
-                        swipeHandler: (direction, card) {
-                          ProblemCard pc = card as ProblemCard;
-                          if (direction == AxisDirection.right &&
-                                  pc.problem.isValid() ||
-                              direction == AxisDirection.left &&
-                                  !pc.problem.isValid()) {
-                            setState(() {
-                              _highScore +=
-                                  pc.problem.operand1 * pc.problem.operand2;
-                            });
-                          } else {
-                            if (_lives > 1) {
-                              setState(() {
-                                _lives--;
-                              });
-                            } else {
-                              final score = Highscore();
-                              score.score = _highScore;
-                              score.userId =
-                                  Provider.of<UserModel>(context, listen: false)
-                                      .user
-                                      ?.id;
-                              HighscoreRepository.insert(score);
-                              Provider.of<HighscoreModel>(context,
-                                      listen: false)
-                                  .highscore = _highScore;
-                              Navigator.of(context)
-                                  .pushReplacementNamed('/game_over');
-                            }
-                          }
-                        },
+                        swipeHandler: _handleSwipe,
                       ))))
         ],
       ),
       color: Theme.of(context).canvasColor,
     ));
+  }
+
+  void _handleSwipe(direction, card) {
+    ProblemCard pc = card as ProblemCard;
+    if (direction == AxisDirection.right && pc.problem.isValid() ||
+        direction == AxisDirection.left && !pc.problem.isValid()) {
+      setState(() {
+        _highScore += pc.problem.operand1 * pc.problem.operand2;
+      });
+    } else {
+      if (_lives > 1) {
+        setState(() {
+          _lives--;
+        });
+      } else {
+        final score = Highscore();
+        score.score = _highScore;
+        score.userId = Provider.of<UserModel>(context, listen: false).user?.id;
+        HighscoreRepository.insert(score);
+        Provider.of<HighscoreModel>(context, listen: false).highscore =
+            _highScore;
+        Navigator.of(context).pushReplacementNamed('/game_over');
+      }
+    }
   }
 
   Problem getProblem() {
@@ -117,14 +113,4 @@ class _GamePageState extends State<GamePage> {
     }
     return icons;
   }
-}
-
-class TimesIcons {
-  static const Icon fullHeart = Icon(
-    Icons.favorite,
-    color: TimesColor.orange,
-    size: 24,
-  );
-  static const Icon emptyHeart =
-      Icon(Icons.favorite_border, color: TimesColor.orange, size: 24);
 }

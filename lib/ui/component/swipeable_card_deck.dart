@@ -7,6 +7,7 @@ import 'package:flutter/physics.dart';
 typedef SwipeHandler = void Function(AxisDirection direction, Card card);
 typedef CardBuilder = Card Function();
 
+/// Widget that provides a Tinder-esque stack of cards which can be swiped left or right
 /// Based on https://github.com/jushutch/swiping_card_deck
 class SwipeableCardDeck extends StatefulWidget {
   final CardBuilder _cardBuilder;
@@ -104,10 +105,6 @@ class _SwipeableCardDeckState extends State<SwipeableCardDeck>
       },
       onPanEnd: (DragEndDetails details) async {
         double vx = details.velocity.pixelsPerSecond.dx;
-
-        final minVelocity = widget._minVelocity;
-        final x = _dragAlignment.x;
-        log('vs: $vx, minVelocity: $minVelocity, x: $x, swipeThreshold: $_swipeThreshold');
 
         if (vx >= widget._minVelocity || _dragAlignment.x >= _swipeThreshold) {
           await _swipeCard(AxisDirection.right);

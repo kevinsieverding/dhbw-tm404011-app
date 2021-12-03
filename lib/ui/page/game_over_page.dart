@@ -4,6 +4,7 @@ import 'package:times/model/highscore_model.dart';
 import 'package:times/theme/times_color.dart';
 import 'package:times/theme/times_text.dart';
 
+/// Page for displaying when the player has lost a game.
 class GameOverPage extends StatelessWidget {
   const GameOverPage({Key? key}) : super(key: key);
 

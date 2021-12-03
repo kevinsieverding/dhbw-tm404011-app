@@ -6,6 +6,7 @@ import 'package:times/repository/user_repository.dart';
 import 'package:times/theme/times_color.dart';
 import 'package:times/theme/times_text.dart';
 
+/// A basic splash page to show on startup while data is being loaded.
 class SplashPage extends StatelessWidget {
   const SplashPage({Key? key}) : super(key: key);
 

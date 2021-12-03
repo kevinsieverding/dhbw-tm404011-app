@@ -1,5 +1,6 @@
 import 'package:times/model/highscore.dart';
 
+/// DAO for accessing highscores joined with user information
 class HighscoreWithUserName extends Highscore {
   String? userName;
 

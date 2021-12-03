@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:times/ui/page/home_page/view/highscore_view.dart';
 import 'package:times/ui/page/home_page/view/home_view.dart';
 
+/// The application's home page, featuring different views that are changed
+/// using a bottom navigation bar.
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 

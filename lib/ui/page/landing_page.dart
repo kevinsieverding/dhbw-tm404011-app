@@ -3,6 +3,7 @@ import 'package:times/theme/times_color.dart';
 import 'package:times/theme/times_text.dart';
 import 'package:times/ui/component/form/name_form.dart';
 
+/// A basic landing page to prompt the player's name.
 class LandingPage extends StatelessWidget {
   const LandingPage({Key? key}) : super(key: key);
 
